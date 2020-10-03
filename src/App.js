@@ -8,8 +8,8 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">interAi File System React</h1>
+          <h3 className="App-title">Dror Avidov</h3>
         </header>
         <div className="App-intro">
           <FileExplorer />

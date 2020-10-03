@@ -58,7 +58,7 @@ export default class Tree extends Component {
     const { nodes } = this.state;
     if (!node.children) return [];
     return node.children.map(path => nodes[path]);
-  }  
+  }
 
   onToggle = (node) => {
     const { nodes } = this.state;
@@ -71,16 +71,63 @@ export default class Tree extends Component {
     onSelect(node);
   }
 
+  onNodeRemove = node => {
+    const { nodes } = this.state;
+
+    // We need to look up this items' parent first
+    for (const [key, value] of Object.entries(nodes)) {
+      if (value.children && value.children.length > 0) {
+        const index = value.children.findIndex(key => key === node.path);
+        if (index >= 0) {
+          nodes[key].children.splice(index, 1);
+        }
+      }
+    }
+
+    delete nodes[node.path]
+
+    this.setState({ nodes });
+  }
+
+  handleNodeAdd = (node, parentKey) => {
+    const { nodes } = this.state;
+
+    let newItem = {}
+
+    if (node.content) { // File
+      newItem = { [node.path]: {
+          path: node.path,
+          type: 'file',
+          content: node.content
+        }
+      }
+    } else { // Folder
+      newItem = { [node.path]: {
+        path: node.path,
+        type: 'folder',
+        children: []
+      }}
+    }
+
+    nodes[node.key] = newItem[node.key];
+
+    nodes[parentKey].children.push(node.key);
+
+    this.setState({ nodes });
+  }
+
   render() {
     const rootNodes = this.getRootNodes();
     return (
       <div>
         { rootNodes.map(node => (
-          <TreeNode 
+          <TreeNode
             node={node}
+            key={node.path}
             getChildNodes={this.getChildNodes}
             onToggle={this.onToggle}
             onNodeSelect={this.onNodeSelect}
+            onNodeRemove={this.onNodeRemove}
           />
         ))}
       </div>
