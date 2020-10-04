@@ -76,8 +76,8 @@ const TreeNode = (props) => {
           </span>
         </TreeNodeWrapper>
 
-        <RemoveIcon role="button" onClick={() => onNodeRemove(node)}>
-          { node.isRoot === undefined && <FaMinusCircle /> }
+        <RemoveIcon role="button" onClick={() => onNodeRemove(node)} title="Remove item">
+          { node && node.isRoot === undefined && <FaMinusCircle /> }
         </RemoveIcon>
       </StyledTreeNode>
 

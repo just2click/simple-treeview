@@ -9,7 +9,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">interAi File System React</h1>
-          <h3 className="App-title">Dror Avidov</h3>
+          <h3 className="App-title">by Dror Avidov</h3>
         </header>
         <div className="App-intro">
           <FileExplorer />

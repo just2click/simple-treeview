@@ -95,21 +95,20 @@ export default class Tree extends Component {
     let newItem = {}
 
     if (node.content) { // File
-      newItem = { [node.path]: {
-          path: node.path,
-          type: 'file',
-          content: node.content
-        }
+      newItem = {
+        path: node.key,
+        type: 'file',
+        content: node.content
       }
     } else { // Folder
-      newItem = { [node.path]: {
-        path: node.path,
+      newItem = {
+        path: node.key,
         type: 'folder',
         children: []
-      }}
+      }
     }
 
-    nodes[node.key] = newItem[node.key];
+    nodes[node.key] = newItem;
 
     nodes[parentKey].children.push(node.key);
 
