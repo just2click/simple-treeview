@@ -37,7 +37,7 @@ export default class FileExplorer extends Component {
     super();
     this.state = {
       selectedFile: null,
-      newItem: null
+      newItem: null // Bug not used
     };
 
     this.tree = React.createRef();
