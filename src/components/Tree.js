@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import TreeNode from './TreeNode';
 
+// Dummy data
 const data = {
   '/root': {
     path: '/root',
@@ -117,6 +118,7 @@ export default class Tree extends Component {
 
   render() {
     const rootNodes = this.getRootNodes();
+
     return (
       <div>
         { rootNodes.map(node => (

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import last from 'lodash/last';
 import Buttons from './Buttons'
 import Tree from './Tree';
 
@@ -22,6 +23,7 @@ const TreeWrapper = styled.div`
   width: 250px;
 `;
 
+// Display content of a file
 const FileContentWrapper = styled.div`
   visibility: ${props => props.selectedFile && props.selectedFile.content && props.selectedFile.content !== '' ? 'visible' : 'hidden'};
   width: 250px;
@@ -40,7 +42,7 @@ export default class FileExplorer extends Component {
       newItem: null // Bug not used
     };
 
-    this.tree = React.createRef();
+    this.tree = React.createRef(); // Reference this child so we can invoke inner functions
     this.handleItemSelection = this.handleItemSelection.bind(this);
     this.getFilename = this.getFilename.bind(this);
   }
@@ -52,12 +54,13 @@ export default class FileExplorer extends Component {
     this.tree.current.handleNodeAdd(updatedItem, state.selectedFile.path);
   }
 
+  // Helper function to get file name when it is displayed
   getFilename () {
     const { state } = this;
     if (state.selectedFile && state.selectedFile.path) {
-      const fileNameParts = state.selectedFile.path.split('/');
+      const fileName = last(state.selectedFile.path.split('/'));
 
-      return 'File: ' + fileNameParts[fileNameParts.length - 1];
+      return 'File: ' + fileName;
     }
 
     return ''
